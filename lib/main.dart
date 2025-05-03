@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_guess_the_number/app_colors.dart';
-import 'package:flutter_guess_the_number/background_view.dart';
-import 'package:flutter_guess_the_number/game.dart';
-import 'package:flutter_guess_the_number/slider_widget.dart';
-import 'package:flutter_guess_the_number/test_view.dart';
-import 'package:flutter_guess_the_number/view_model.dart';
+import 'package:flutter_guess_the_number/view/background_view.dart';
+import 'package:flutter_guess_the_number/model/game.dart';
+import 'package:flutter_guess_the_number/widgets/slider_widget.dart';
+import 'package:flutter_guess_the_number/view/test_view.dart';
+import 'package:flutter_guess_the_number/viewmodel/view_model.dart';
 import 'package:provider/provider.dart';
 
 void main() {
@@ -94,6 +94,7 @@ class _ContentViewState extends State<ContentView> {
   void _onPressed() {
     var appState = Provider.of<ViewModel>(context, listen: false);
     appState.calculatePoints(_value);
+    appState.bestScores(appState.points);
     showDialog(
       context: context,
       builder:

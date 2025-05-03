@@ -7,12 +7,14 @@ class Game {
   int _targetValue = 0;
   int _points = 0;
   int _score = 0;
-  int _rounds = 0;  
+  int _rounds = 0;
+  final List<int> _numeros = [];
 
   int get score => _score;
   int get rounds => _rounds;
   int get targetValue => _targetValue;
   int get points => _points;
+  List<int> get numeros => _numeros;
 
   Game() {
     _targetValue = Random().nextInt(MAX_VALUE + 1 - MIN_VALUE) + MIN_VALUE;
@@ -36,5 +38,18 @@ class Game {
     _points = 0;
     _score = 0;
     _rounds = 0;
+  }
+
+  void bestScores(int score) {
+    if (_numeros.length < 5){
+      _numeros.add(score);
+    } else {
+      int menor = _numeros.reduce(min);
+
+      if (score > menor){
+        int indiceMenor = _numeros.indexOf(menor);
+        _numeros[indiceMenor] = score;
+      }
+    }
   }
 }
