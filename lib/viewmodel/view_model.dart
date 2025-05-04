@@ -8,7 +8,7 @@ class ViewModel extends ChangeNotifier {
   int get rounds => _game.rounds;
   int get targetValue => _game.targetValue;
   int get points => _game.points;
-  List<int> get numeros => _game.numeros;
+  List<Map<String, dynamic>> get numeros => _game.numeros;
 
   void calculatePoints(double sliderValue) {
     _game.calculatePoints(sliderValue);

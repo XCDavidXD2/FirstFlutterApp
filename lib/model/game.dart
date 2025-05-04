@@ -8,13 +8,13 @@ class Game {
   int _points = 0;
   int _score = 0;
   int _rounds = 0;
-  final List<int> _numeros = [];
+  final List<Map<String, dynamic>> _numeros = [];
 
   int get score => _score;
   int get rounds => _rounds;
   int get targetValue => _targetValue;
   int get points => _points;
-  List<int> get numeros => _numeros;
+  List<Map<String, dynamic>> get numeros => _numeros;
 
   Game() {
     _targetValue = Random().nextInt(MAX_VALUE + 1 - MIN_VALUE) + MIN_VALUE;
@@ -41,14 +41,19 @@ class Game {
   }
 
   void bestScores(int score) {
-    if (_numeros.length < 5){
-      _numeros.add(score);
-    } else {
-      int menor = _numeros.reduce(min);
+    Map<String, dynamic> scoreData = {
+      'score': score,
+      'timestamp': DateTime.now(),
+    };
 
-      if (score > menor){
-        int indiceMenor = _numeros.indexOf(menor);
-        _numeros[indiceMenor] = score;
+    if (_numeros.length < 5) {
+      _numeros.add(scoreData);
+    } else {
+      int menor = _numeros.map((e) => e['score'] as int).reduce(min);
+
+      if (score > menor) {
+        int indiceMenor = _numeros.indexWhere((element) => element['score'] == menor);
+        _numeros[indiceMenor] = scoreData;
       }
     }
   }

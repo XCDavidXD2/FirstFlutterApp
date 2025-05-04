@@ -24,11 +24,21 @@ class MarksView extends StatelessWidget {
                 shrinkWrap: true,
                 itemCount: appState.numeros.length,
                 itemBuilder: (BuildContext context, int index) {
-                  return Container(
-                    child: Center(
-                      child: Text(
-                        appState.numeros[index].toString(),
-                        style: const TextStyle(fontSize: 20),
+
+                  final scoreData = appState.numeros[index];
+                  final int score = scoreData['score'] as int;
+                  final DateTime timestamp = scoreData['timestamp'] as DateTime;
+
+                  return Card(
+                    margin: const EdgeInsets.symmetric(vertical: 8, horizontal: 16),
+                    child: ListTile(
+                      title: Text(
+                        "Puntuación: $score",
+                        style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                      ),
+                      subtitle: Text(
+                        "Fecha: ${timestamp.day}/${timestamp.month}/${timestamp.year} - Hora: ${timestamp.hour.toString().padLeft(2, '0')}:${timestamp.minute.toString().padLeft(2, '0')}:${timestamp.second.toString().padLeft(2, '0')}",
+                        style: const TextStyle(fontSize: 14),
                       ),
                     ),
                   );
